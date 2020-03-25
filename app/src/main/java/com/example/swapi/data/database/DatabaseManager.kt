@@ -13,7 +13,7 @@ interface DatabaseManager {
     val database: SwapiDatabase
 
     companion object {
-        private const val DATABASE_NAME = "rick_and_morty.db"
+        private const val DATABASE_NAME = "swapi.db"
 
         @Volatile
         private var databaseManager: DatabaseManager? = null
