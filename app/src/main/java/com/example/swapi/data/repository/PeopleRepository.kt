@@ -1,4 +1,4 @@
-package com.example.swapi.data.respository
+package com.example.swapi.data.repository
 
 import com.example.swapi.data.database.DatabaseManager
 import com.example.swapi.data.database.SwapiDatabase
@@ -18,7 +18,7 @@ class PeopleRepositoryImpl(private val api: PeopleAPI,private val database: Swap
                 check(response.isSuccessful) { "Response is not a success : code = ${response.code()}" }
                 val data :PeopleRemote? = response.body()
                 data?.let {
-                    database.peopleDao.insertAll(it)
+//                    database.peopleDao.insertAll(it)
                 } ?: throw IllegalStateException("Body is null")
                 return@withContext data
             } catch (e: Exception) {
