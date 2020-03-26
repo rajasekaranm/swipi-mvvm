@@ -1,24 +1,31 @@
 package com.example.swapi.ui.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.findNavController
 import com.example.swapi.R
-import com.example.swapi.ui.viewmodel.PeopleViewModel
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var peopleViewModel: PeopleViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        peopleViewModel = ViewModelProvider(this, PeopleViewModel).get()
         setContentView(R.layout.activity_main)
-        peopleViewModel.getPeople(1,{
-            text.text="${Gson().toJson(it)}"
-        })
+        initToolBar()
+    }
+
+    override fun onNavigateUp(): Boolean {
+        // We just say to the activity that its back stack will manage by the NavController
+        return findNavController(R.id.main_fragment_container).navigateUp()
+    }
+
+    /**
+     * Init the ToolBar
+     */
+    private fun initToolBar() {
+        setSupportActionBar(main_tool_bar)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_back)
+        main_tool_bar.setNavigationOnClickListener { onNavigateUp() }
     }
 }

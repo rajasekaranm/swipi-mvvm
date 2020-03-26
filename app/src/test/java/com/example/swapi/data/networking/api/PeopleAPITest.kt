@@ -21,7 +21,7 @@ class PeopleAPITest {
 
     @Test
     fun getPeople() = runBlocking {
-           api.getPeople(1).apply {
+           api.getPeople("https://swapi.co/api/people/3/").apply {
               Assert.assertTrue("Request must be a success", this.isSuccessful)
                println("test success for people api")
          }

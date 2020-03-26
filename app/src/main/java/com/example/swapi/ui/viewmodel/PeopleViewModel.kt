@@ -12,9 +12,12 @@ open class PeopleViewModel(
     private val repository: PeopleRepository
 ) : ViewModel() {
 
-    fun getPeople(id: Int, onSuccess: OnSuccess<PeopleRemote>) {
+
+    val peoplePagedList = repository.getPeoplePagedList(viewModelScope)
+
+    fun getPeople(url: String, onSuccess: OnSuccess<PeopleRemote>) {
         viewModelScope.launch {
-            repository.getPeople(id)?.let {
+            repository.getPeople(url)?.let {
                 onSuccess.invoke(it)
             }
         }
